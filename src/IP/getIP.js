@@ -1,7 +1,8 @@
 
 import { useEffect, useState} from 'react';
-import {IpMap} from "../Map-Tap/Maps"
+import IpMap from "./map"
 import Info from "./country"
+import Time from "./time"
 
 const GetIP = () => {
 
@@ -21,11 +22,15 @@ const GetIP = () => {
 
     return (
         <div>
-        
-        {userIp ? userIp.ip : '...loading'}
-        {userIp ? <Info country={userIp.location.country}/> : '...loading'}
-        {userIp ? <IpMap lat={userIp.location.lat} lng={userIp.location.lng}/> : '...loading'}
-        
+        {userIp ?
+        <div>
+         {userIp.ip}
+        <br/>
+        <Time timezone ={userIp.location.timezone}/>
+        <Info country={userIp.location.country}/>
+        <img src={`https://www.countryflags.io/${userIp.location.country}/flat/64.png`}/>
+        <IpMap lat={userIp.location.lat} lng={userIp.location.lng}/>
+        </div> : '...loading'}
         </div>
     )
 }
